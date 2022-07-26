@@ -43,7 +43,6 @@ function FormInput ({}){
     return <Form
     name="basic"
     onFinish={onFinish}
-    onFinishFailed={onFinishFailed}
     autoComplete="off"
     
     form={formControl}
