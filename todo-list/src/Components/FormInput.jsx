@@ -4,9 +4,10 @@ import { useContext } from 'react';
 import { TodoContext } from '../Context';
 import { EditOutlined } from '@ant-design/icons';
 
-function FormInput ({}){
+function FormInput ({sortValue, sortTodoList}){
     const {todoList,editTodo,formControl,setEditTodo, setTodoList} = useContext(TodoContext)
     const onFinish = ({title}) => {
+      if(!title) return
       formControl.setFieldsValue({title:''})
       let newTodoList = []
       if(editTodo){
@@ -23,6 +24,7 @@ function FormInput ({}){
             ...rest
           }
         })
+        newTodoList = sortTodoList(newTodoList,sortValue)
       }else{
         newTodoList = [
           ...todoList,
@@ -32,13 +34,14 @@ function FormInput ({}){
               isChecked:false
           }
         ]
+        newTodoList = sortTodoList(newTodoList,sortValue)
       }
         setTodoList(newTodoList)
         setEditTodo(null)
         localStorage.setItem('todoList', JSON.stringify(newTodoList))
     };
     
-      
+    
 
     return <Form
     name="basic"
@@ -56,6 +59,7 @@ function FormInput ({}){
     >
       <Input placeholder='What needs to be done' />
     </Form.Item>
+    
    </Col>
    <Col span={2} >
    <Form.Item
