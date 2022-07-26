@@ -3,8 +3,8 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useContext } from 'react';
 import { TodoContext } from '../Context';
 
-function TodoItem({itemId,isChecked,children}){
-    const {todoList, setTodoList} = useContext(TodoContext)
+function TodoItem({itemId,todo,isChecked,children}){
+    const {todoList, setTodoList,formControl, setEditTodo} = useContext(TodoContext)
     const onChange = (e) =>{
         const newTodoList=  todoList.map(({id, ...rest}) => (
             id === itemId ? {
@@ -17,24 +17,28 @@ function TodoItem({itemId,isChecked,children}){
             }
         ))
         setTodoList(newTodoList)
-        localStorage.setItem(newTodoList)
+        localStorage.setItem('todoList',newTodoList)
     }
 
     const handleDeleteTodo = itemId => {
         setTodoList(todoList.filter(({id}) => itemId !== id))
     }
 
+    const handleSelectTodo = todo => {
+        setEditTodo(todo)
+        formControl.setFieldsValue(todo)
+    }
+
     return   <>
-            <List.Item>
+            <List.Item >
                     <Space>
                         <Checkbox onChange={onChange} checked={isChecked}></Checkbox>
                         <span  className={`${isChecked ? 'line' :''}`}>
-
-                            hjkjhkhk{children}
+                            {children}
                         </span>
                     </Space>
                     <Space>
-                    <EditOutlined />
+                    <EditOutlined onClick={()=> handleSelectTodo(todo)}/>
                     <DeleteOutlined onClick={()=>handleDeleteTodo(itemId)}/>
                     </Space>
                     

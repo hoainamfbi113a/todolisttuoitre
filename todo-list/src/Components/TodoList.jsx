@@ -10,7 +10,7 @@ function TodoList(){
       size="large"
       
       dataSource={todoList}
-      renderItem={item => <TodoItem itemId={item.id} isChecked={item.isChecked}>{item.title}</TodoItem>}
+      renderItem={item => <TodoItem itemId={item.id} todo={item} isChecked={item.isChecked}>{item.title}</TodoItem>}
     />
     </>
 }

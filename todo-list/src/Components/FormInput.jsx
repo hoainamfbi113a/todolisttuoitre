@@ -1,23 +1,42 @@
-import { Button, Form, Input } from 'antd';
-import { Col, Row } from 'antd';
+import { Button, Form, Input, Col, Row } from 'antd';
 import 'antd/dist/antd.css';
 import { useContext } from 'react';
 import { TodoContext } from '../Context';
+import { EditOutlined } from '@ant-design/icons';
 
-function FormInput (){
-    const {todoList,editTodo, setTodoList} = useContext(TodoContext)
+function FormInput ({}){
+    const {todoList,editTodo,formControl,setEditTodo, setTodoList} = useContext(TodoContext)
     const onFinish = ({title}) => {
-      const newTodoList = [
-        ...todoList,
-        {
-            id:Math.random(),
-            title,
-            isChecked:false
-        }
-    ]
+      formControl.setFieldsValue({title:''})
+      let newTodoList = []
+      if(editTodo){
+        newTodoList = todoList.map(({id,...rest}) => {
+          if(id === editTodo.id){
+            return {
+              id,
+              ...rest,
+              title
+            }
+          }
+          return {
+            id,
+            ...rest
+          }
+        })
+      }else{
+        newTodoList = [
+          ...todoList,
+          {
+              id:Math.random(),
+              title,
+              isChecked:false
+          }
+        ]
+      }
         setTodoList(newTodoList)
+        setEditTodo(null)
         localStorage.setItem('todoList', JSON.stringify(newTodoList))
-      };
+    };
     
       const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
@@ -28,6 +47,8 @@ function FormInput (){
     onFinish={onFinish}
     onFinishFailed={onFinishFailed}
     autoComplete="off"
+    
+    form={formControl}
   >
 
     <Row>
@@ -35,8 +56,6 @@ function FormInput (){
    <Col span={22}>
    <Form.Item
       name="title"
-      
-    //   ]}
     >
       <Input placeholder='What needs to be done' />
     </Form.Item>
@@ -49,8 +68,9 @@ function FormInput (){
       }}
     >
       <Button type="primary" htmlType="submit">
-        +
+        {editTodo ? <EditOutlined /> : '+'}
       </Button>
+      
     </Form.Item>
    </Col>
     
