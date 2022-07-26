@@ -21,7 +21,9 @@ function TodoItem({itemId,todo,isChecked,children}){
     }
 
     const handleDeleteTodo = itemId => {
-        setTodoList(todoList.filter(({id}) => itemId !== id))
+        const newTodoList = todoList.filter(({id}) => itemId !== id)
+        setTodoList(newTodoList)
+        localStorage.setItem('todoList',newTodoList)
     }
 
     const handleSelectTodo = todo => {

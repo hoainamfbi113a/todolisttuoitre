@@ -38,9 +38,7 @@ function FormInput ({}){
         localStorage.setItem('todoList', JSON.stringify(newTodoList))
     };
     
-      const onFinishFailed = (errorInfo) => {
-        console.log('Failed:', errorInfo);
-      };
+      
 
     return <Form
     name="basic"
