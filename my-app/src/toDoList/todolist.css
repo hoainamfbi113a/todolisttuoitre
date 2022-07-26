@@ -2,17 +2,15 @@
     display: flex;
     justify-content: center;
     background-color: #489cc1;
-    height: 100vh;
     text-align: center;
-    padding-top: 10%;
+    padding: 10% 0;
 }
 
 .background div.content {
-    display: inline;
     background-color: white;
     width: 50%;
-    height: 50%;
     padding: 10px 50px;
+    height: fit-content;
 }
 
 .background div.content div.content__input {
@@ -43,6 +41,7 @@
 
 .background div.content div.todolist {
     display: flex;
+    justify-content: space-between;
     width: 100%;
 }
 
@@ -50,12 +49,26 @@
     margin-right: 15px;
 }
 
-.background div.content div.todolist p {
+.background div.content div.todolist input {
     text-align: left;
-    width: 80%;
+    width: 88%;
+    border: none;
 }
 
 .background div.content div.todolist svg {
     color: blue;
     font-size: 25px;
+}
+
+.ant-divider-horizontal {
+    margin: 10px 0;
+}
+
+.content__footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+.content__footer .ant-progress-line {
+    width: 30%;
 }
