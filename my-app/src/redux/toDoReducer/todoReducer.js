@@ -1,36 +1,46 @@
+import { addToDo, checked, deleteToDo, editToDo, removeAllChecked } from "../type/type";
+
 const stateDefault = {
     todo: [
-        {content:"dắt chó",status:false},
-        {content:"dắt chó 1",status:false},
-        {content:"dắt chó 2",status:false},
     ]   
 }
 
 export const ToDoReducer = (state = stateDefault, action)=>{
     switch(action.type){
-        case "todoDispatch": {
+        case addToDo: {
             const {content} = action.todo;
             const newToDo = [...state.todo,{content: content,status:false}];
             const newState = {...state,todo:[...newToDo]};
             state = newState;
             return {...state}
         };
-        case "editToDo":{
+        case editToDo:{
             const {content,key} = action.todo;
             let newToDo = [...state.todo];
             newToDo[key].content = content.content;
             state.todo = [...newToDo];
-            console.log("edit",state)
             return {...state}
         };
-        case "deleteToDo":{
+        case deleteToDo:{
             let {index} = action;
             let newToDo = [...state.todo];
             newToDo.splice(index,1);
             state.todo = [...newToDo];
-            console.log("delete",state)
             return {...state}
-        }
+        };
+        case checked:{
+            let {checked,index} = action.checkedToDo;
+            let newToDoList = [...state.todo];
+            newToDoList[index].status = checked;
+            state.todo = [...newToDoList];
+            return {...state};
+        };
+        case removeAllChecked: {
+            let newToDoList = [...state.todo];
+            newToDoList.forEach(work => work.status = false); 
+            state.todo = [...newToDoList];
+            return {...state};
+        };
         default: return {...state}
     }
 } 

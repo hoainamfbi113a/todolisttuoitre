@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
 import Todo from '../Components/Todo/Todo';
 import { Progress } from 'antd';
+import { addToDo, removeAllChecked } from '../redux/type/type';
 
 export default function ToDoListComponent() {
   const {Title} = Typography;
@@ -21,12 +22,12 @@ export default function ToDoListComponent() {
   }
 
   const dispatchToDo = ()=>{
-    if(state.content == ""){
+    if(state.content === ""){
       alert("Vui lòng nhập việc muốn làm.")
     } else {
       dispatch({
         todo: state,
-        type: "todoDispatch"
+        type: addToDo
       });
       setState({content:""});
     }
@@ -36,7 +37,7 @@ export default function ToDoListComponent() {
   const renderList = ()=>{
     // console.log("renderlist",toDoList)
     return toDoList.todo.map((todo,index)=>{
-      return <Todo content={todo.content} index={index} key={index} />
+      return <Todo todo={todo} index={index} key={index} />
     })
   }
   
@@ -49,10 +50,15 @@ export default function ToDoListComponent() {
           <PlusOutlined className="abc" onClick={dispatchToDo} />
         </div>
         <Divider/>
-        {toDoList.todo.length >0 ? renderList() : ""}
+        {toDoList.todo.length > 0 ? renderList() : ""}
         <div className="content__footer">
-          <Progress />
-          <Button>Remove checked box</Button>
+          <Progress percent={Math.round((toDoList.todo.filter(todo => todo.status === true).length / toDoList.todo.length * 100),2)} />
+          <Button onClick={()=>{
+            dispatch({
+              payload:"",
+              type: removeAllChecked
+            })
+          }}>Remove checked box</Button>
         </div>
       </div>
     </div>

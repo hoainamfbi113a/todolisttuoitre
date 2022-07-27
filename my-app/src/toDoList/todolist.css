@@ -34,7 +34,7 @@
     background-color: #5f9fcd;
 }
 
-.anticon svg {
+.background div.content div.content__input .anticon svg {
     color: white;
     font-size: 40px;
 }
@@ -71,4 +71,9 @@
 
 .content__footer .ant-progress-line {
     width: 30%;
+}
+
+.anticon svg {
+    color: #52c41a;
+    font-size: 20px;
 }

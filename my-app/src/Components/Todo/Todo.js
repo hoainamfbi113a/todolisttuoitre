@@ -3,18 +3,23 @@ import { CloseOutlined, EditFilled } from '@ant-design/icons';
 import { Checkbox } from 'antd';
 import { Divider } from 'antd';
 import { useDispatch } from 'react-redux';
+import {editToDo,deleteToDo} from "../../redux/type/type";
 
 export default function Todo(props) {
 
     const {index} = props;
 
-    const [state,setState]=useState({content:props.content});
+    const [state,setState]=useState({...props.todo});
     const [disabled,setDisabled]=useState(true);
 
     const dispatch = useDispatch();
 
-    const onChange = (e) => {
-        console.log(`checked = ${e.target.checked}`);
+    const onChange = (e,index) => {
+      let {checked} = e.target;
+      dispatch({
+        checkedToDo: {checked,index},
+        type: "checked"
+      })
     };
 
     const handleChange = (e)=>{
@@ -24,38 +29,37 @@ export default function Todo(props) {
       })
     }
 
-    const editToDo = (content)=>{
+    const handleEditToDo = (content)=>{
       dispatch({
         todo:content,
-        type: "editToDo"
+        type: editToDo
       })
     }
 
-    const deleteToDo = (index)=>{
+    const handleDeleteToDo = (index)=>{
       dispatch({
         index,
-        type: "deleteToDo"
+        type: deleteToDo
       })
     }
 
     useEffect(()=>{
-      setState({content:props.content});
+      setState({...props.todo});
     },[props])
 
   return (
     <>
       <div className="todolist">
-            <Checkbox onChange={onChange} />
+            <Checkbox checked={state.status} onChange={(e)=>{onChange(e,index)}} />
             <input type="text" value={state.content} disabled={disabled} onChange={handleChange} />
             <EditFilled onClick={ () => {  
               setDisabled(!disabled);
-              console.log(!disabled)
               if(!disabled === true){
-                    editToDo({content:state,key:index})
+                handleEditToDo({content:state,key:index})
               }
             }} />
             <CloseOutlined onClick={()=>{
-              deleteToDo(index)
+              handleDeleteToDo(index)
             }} />
       </div>
       <Divider/>
