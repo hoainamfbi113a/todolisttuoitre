@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
 import Todo from '../Components/Todo/Todo';
 import { Progress } from 'antd';
-import { addToDo, removeAllChecked } from '../redux/type/type';
+import { addToDo, removeAllChecked, sortAZ, sortZA } from '../redux/type/type';
 
 export default function ToDoListComponent() {
   const {Title} = Typography;
@@ -59,6 +59,18 @@ export default function ToDoListComponent() {
               type: removeAllChecked
             })
           }}>Remove checked box</Button>
+          <Button onClick={()=>{
+            dispatch({
+              type:sortAZ,
+              payload:""
+            })
+          }}>Sort A - Z</Button>
+          <Button onClick={()=>{
+            dispatch({
+              type:sortZA,
+              payload:""
+            })
+          }}>Sort Z - A</Button>
         </div>
       </div>
     </div>

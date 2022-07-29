@@ -1,7 +1,8 @@
-import { addToDo, checked, deleteToDo, editToDo, removeAllChecked } from "../type/type";
+import { addToDo, checked, deleteToDo, editToDo, removeAllChecked, sortAZ, sortZA } from "../type/type";
 
 const stateDefault = {
     todo: [
+        
     ]   
 }
 
@@ -41,6 +42,32 @@ export const ToDoReducer = (state = stateDefault, action)=>{
             state.todo = [...newToDoList];
             return {...state};
         };
+        case sortAZ: {
+            let newToDoList = [...state.todo];
+            let newList = newToDoList.sort(function(a,b){
+                if(a.status < b.status){
+                    return -1
+                } else {
+                    return 1
+                }
+            });
+            // console.log(newList)
+            state.todo = [...newList];
+            return {...state}
+        };
+        case sortZA: {
+            let newToDoList = [...state.todo];
+            let newList = newToDoList.sort(function(a,b){
+                if(a.status > b.status){
+                    return -1
+                } else {
+                    return 1
+                }
+            });
+            // console.log(newList)
+            state.todo = [...newList];
+            return {...state}
+        }
         default: return {...state}
     }
 } 
