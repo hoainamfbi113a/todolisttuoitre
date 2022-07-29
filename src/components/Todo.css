@@ -1,0 +1,139 @@
+
+/* src/components/Todo.css */
+
+body{
+background: #2980b9;
+background: linear-gradient(215deg, #71b073 29.9%, #2776aa 80%), linear-gradient(304deg, rgba(255, 101, 53, 0.4) 24.9%, #aa2743 91%), linear-gradient(10deg, #b1c9d8 19.9%, #2776aa 50%), linear-gradient(145deg, #f4df26 15.9%, #ff1b9a 40%);  
+  background-repeat: no-repeat;
+  background-blend-mode: hard-light;
+  padding-bottom: 10%;
+/* filter: blur(8px);
+  -webkit-filter: blur(8px); */
+
+}
+
+.todo-container{
+background: rgb(41, 33, 33);
+width: 40vw;
+margin: 10em auto;
+border-radius: 15px;
+padding: 20px 10px;
+color: white;
+border: 3px solid rgb(36, 110, 194);
+}
+    
+.task{
+border: 1px solid white;
+border-radius: 5px;
+padding: 0.5em;
+margin: 0.5em;
+}
+
+.task button{
+background: rgb(12, 124, 251);
+border-radius: 5px;
+margin: 0px 5px;
+padding: 3px 5px;
+border: none;
+cursor: pointer;
+color: white;
+float: right;
+}
+
+.header{
+margin: 0.5em;
+font-size: 2em;
+text-align: center;
+}
+
+.create-task input[type=text]{
+margin: 2.5em 2em;
+width: 80%;
+outline: none;
+border: none;
+padding: 0.7em;
+}
+
+.header{
+    text-shadow: 0 0 4px #fff,
+    0 0 10px #fff,
+    0 0 18px #fff,
+    0 0 38px #f09,
+    0 0 73px #f09,
+    0 0 80px #f09,
+    0 0 94px #f09,
+    0 0 140px #f09;
+  
+   
+    
+}
+<!-- HTML !-->
+<button class="button-85" role="button">Button 85</button>
+
+/* CSS */
+.button-85 {
+  padding: 0.6em 2em;
+  border: none;
+  outline: none;
+  color: rgb(255, 255, 255);
+  background: #111;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.task:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 20s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
+.button-85:after {
+  z-index: -1;
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #222;
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
