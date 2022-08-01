@@ -3,14 +3,17 @@ import { CloseOutlined, EditFilled } from '@ant-design/icons';
 import { Checkbox } from 'antd';
 import { Divider } from 'antd';
 import { useDispatch } from 'react-redux';
-import {editToDo,deleteToDo} from "../../redux/type/type";
 
 export default function Todo(props) {
 
     const {index} = props;
 
+    // console.log(props)
+
     const [state,setState]=useState({...props.todo});
-    const [disabled,setDisabled]=useState(true);
+    let [disabled,setDisabled]=useState(true);
+
+    // console.log(state)
 
     const dispatch = useDispatch();
 
@@ -32,14 +35,14 @@ export default function Todo(props) {
     const handleEditToDo = (content)=>{
       dispatch({
         todo:content,
-        type: editToDo
+        type: "editToDoAPI"
       })
     }
 
     const handleDeleteToDo = (index)=>{
       dispatch({
         index,
-        type: deleteToDo
+        type: "deleteToDoAPI"
       })
     }
 
@@ -51,11 +54,14 @@ export default function Todo(props) {
     <>
       <div className="todolist">
             <Checkbox checked={state.status} onChange={(e)=>{onChange(e,index)}} />
-            <input type="text" value={state.content} disabled={disabled} onChange={handleChange} />
+            <input type="text" value={state.textTask} disabled={disabled} onChange={handleChange} />
             <EditFilled onClick={ () => {  
               setDisabled(!disabled);
-              if(!disabled === true){
-                handleEditToDo({content:state,key:index})
+              if(state.content === "" && !disabled === true){
+                alert("Vui lòng nhập việc cần làm.");
+                setDisabled(disabled = false);
+              } else if(!disabled === true && state.content !== ""){
+                handleEditToDo({content:state.content,key: index})
               }
             }} />
             <CloseOutlined onClick={()=>{

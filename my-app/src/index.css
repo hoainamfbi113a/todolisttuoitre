@@ -11,3 +11,26 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+div.loading {
+  background-image: url("./img/loading.gif");
+  background-size: 50px;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  position: fixed;
+  top:0;
+  left:0;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  color: white;
+  align-items: center;
+  padding-top: 100px;
+}
+
+div#root {
+  position: relative;
+}

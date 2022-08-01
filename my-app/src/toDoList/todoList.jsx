@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './todolist.css'
 import { Button, Divider, Typography } from 'antd';
 import { Input } from 'antd';
@@ -6,11 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { PlusOutlined } from '@ant-design/icons';
 import Todo from '../Components/Todo/Todo';
 import { Progress } from 'antd';
-import { addToDo, removeAllChecked, sortAZ, sortZA } from '../redux/type/type';
+import { getToDoList, removeAllChecked, sortAZ, sortZA } from '../redux/type/type';
 
 export default function ToDoListComponent() {
   const {Title} = Typography;
-  const [state,setState] = useState({content:""});
+  const [state,setState] = useState({textTask:""});
   const toDoList = useSelector(state => state.ToDoReducer);
   // console.log("todolist",toDoList)
 
@@ -18,44 +18,47 @@ export default function ToDoListComponent() {
 
   const toDo = (e)=>{
     let {value} = e.target;
-    setState({...state,content: value});
+    setState({...state,textTask: value});
   }
 
   const dispatchToDo = ()=>{
-    if(state.content === ""){
+    if(state.textTask === ""){
       alert("Vui lòng nhập việc muốn làm.")
     } else {
       dispatch({
         todo: state,
-        type: addToDo
+        type: "addToDoAPI"
       });
-      setState({content:""});
+      setState({textTask:""});
     }
-    
   }
 
   const renderList = ()=>{
     // console.log("renderlist",toDoList)
     return toDoList.todo.map((todo,index)=>{
-      return <Todo todo={todo} index={index} key={index} />
+      return <Todo todo={todo} index={todo.id} key={index} />
     })
   }
+
+  useEffect(()=>{
+    dispatch({type: getToDoList});
+  },[dispatch])
   
   return (
     <div className="background">
       <div className="content">
-        <Title style={{color: "#485056"}}>TODOLIST</Title>
+        <Title style={{color: "#485056"}}>TO DO LIST</Title>
         <div className="content__input">
-          <Input style={{fontStyle: "italic",textAlign: "center"}} placeholder="What need to be done" onChange={toDo} value={state?.content} />
+          <Input style={{fontStyle: "italic",textAlign: "center"}} placeholder="What need to be done" onChange={toDo} value={state?.textTask} />
           <PlusOutlined className="abc" onClick={dispatchToDo} />
         </div>
         <Divider/>
         {toDoList.todo.length > 0 ? renderList() : ""}
         <div className="content__footer">
           <Progress percent={Math.round((toDoList.todo.filter(todo => todo.status === true).length / toDoList.todo.length * 100),2)} />
-          <Button onClick={()=>{
+          <Button onClick={()=>{;
             dispatch({
-              payload:"",
+              checkedArr:toDoList.todo.filter(todo => todo.status === true),
               type: removeAllChecked
             })
           }}>Remove checked box</Button>
