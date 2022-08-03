@@ -6,3 +6,4 @@
 6. progress bar
 7. remove all check box was checked
 8. Mock API by axios (use methods: GET, POST, PUT, DELETE)
+9. Sort A-Z and Sort Z-A
