@@ -54,6 +54,10 @@ function App() {
     }
     fetch(todoAPI,options)
       .then(response => getTodo())
+      // .then(function(response){
+      //     response.json()
+      // })
+      // .then(callback)
   }
 
   function deleteTodo(id) {
@@ -64,6 +68,15 @@ function App() {
       },
     }
     fetch(todoAPI + "/" + id,options)
+      // .then(function(response){
+      //     response.json()
+      // })
+      // .then(function(){
+      //     var deleteItem = document.querySelector(`.course-item-${id}`)
+      //     if (deleteItem){
+      //         deleteItem.remove()
+      //     }
+      // })   
   }
 
   function updateTodo(todo, changeComplete = false, toggleAll='checkAll') {
@@ -109,12 +122,25 @@ function App() {
               body: JSON.stringify(task)
             }
             fetch(todoAPI + "/" + task.id,options)
+              // .then(() => {
+              //   console.log(task.id);
+              //   console.log('index1',tasks.indexOf(task),'index2', tasks.length -1);
+              //   if (tasks.indexOf(task) === tasks.length-1) {
+              //     resolve()
+              //     console.log('resolve', task.id);
+              //   }
+              // })
+              // .then(response => response.json())
+              // .then(response => resolve())
+              // .then(() => new Promise(resolve => resolve()))
           })
         }) 
 
       
+      // var result = Promise.all(actions)
       promise.then(resolve => {
         console.log('done');
+        // getTodo()
         setIsUpdating(false)
         message.success({
           content: 'Updated',
@@ -208,9 +234,15 @@ function App() {
     },
   ]
 
+  // console.log('tasks', tasks);
+  // console.log('search tasks', searchTasks);
+  // console.log('index', taskIndex);
+
+
   const handleAdd = () => {
-    if (taskInput.trim()) {
+    if (taskInput) {
       const newTask = {
+        // id: taskIndex,
         task: taskInput,
         level: level === 'Easy' ? 1 : level === 'Medium' ? 2 : 3,
         completed: false

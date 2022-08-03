@@ -211,6 +211,7 @@ function App() {
   const handleAdd = () => {
     if (taskInput.trim()) {
       const newTask = {
+        // id: taskIndex,
         task: taskInput,
         level: level === 'Easy' ? 1 : level === 'Medium' ? 2 : 3,
         completed: false
