@@ -1,9 +1,7 @@
 
 +Add Todo
 +Delete Todo
-
 +Edit Todo
-
 +Check status Todo
 
 +Check all Todo
