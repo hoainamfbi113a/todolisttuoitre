@@ -1,10 +1,11 @@
 import "./App.css";
+import { Button, Form, Input, Table, Modal, message, Progress, Select, Spin,} from "antd";
 import Header from "./components/Header";
 import Content from "./components/Content";
 import Footer from "./components/Footer";
 import UpdateModal from "./components/UpdateModal";
 
-function App() {
+function App2() {
 
   return (
     <div className="App">
@@ -22,4 +23,4 @@ function App() {
   );
 }
 
-export default App;
+export default App2;
