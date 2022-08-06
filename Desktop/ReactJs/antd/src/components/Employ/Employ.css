@@ -1,0 +1,27 @@
+@import "~antd/dist/antd.css";
+body {
+  /* position: absolute; */
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji !important;
+}
+.header_text {
+  width: 548px;
+  height: 27px;
+  margin-left: 20px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 21px;
+  color: #434349;
+}
+.input {
+  width: 200px;
+  height: 40px;
+  left: 26px;
+  top: 73px;
+}
+.input-btn {
+  display: flex;
+  justify-content: space-between;
+}

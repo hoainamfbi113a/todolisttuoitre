@@ -1,0 +1,63 @@
+@import "~antd/dist/antd.css";
+
+.body-content {
+  position: absolute;
+  width: 1154px;
+  height: 800px;
+  left: 0px;
+  top: 0px;
+  margin: 50px 0px 100px 300px;
+  background: pink;
+  border-radius: 12px;
+}
+
+.text-head {
+  position: absolute;
+  width: 468px;
+  height: 27px;
+  left: 35px;
+  top: 39px;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 21px;
+  color: #434349;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji !important;
+    padding: 0;
+    margin: 0;
+}
+
+hr {
+  position: absolute;
+  color: #eeeff3;
+  width: 1154px;
+  height: 1px;
+  left: 300px;
+  top: 160px;
+  background: #eeeff3;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+
+.btn-process:hover {
+  opacity: 0.9;
+  background-color: lightgreen;
+}
+h2{
+  position: absolute;
+  width: 83px;
+  height: 23px;
+  left: 370px;
+  top: 270px;
+  font-weight: 500;
+font-size: 18px;
+line-height: 23px;
+}
+.btn-search:hover{
+  background-color: aqua;
+
+}
