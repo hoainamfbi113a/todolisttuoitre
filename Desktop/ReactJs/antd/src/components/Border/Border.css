@@ -7,8 +7,7 @@
     
     width: 92px;
     height: 32px;
-    left: 923px;
-    top: 292px;
+   
     margin-right: 19px;
     background: #e0fff1;
     border-radius: 4px;
@@ -39,3 +38,27 @@
     color: #ff1493;
     opacity: 0.9;
   }
+/* title : Ho va ten, phong ban.... */
+.ant-table-cell {
+    color: #434349;
+    font-weight: 400;
+    font-size: 16;
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji !important;
+
+}
+/* Phong CNTT, Nhan vien, 90... */
+  .ant-table-thead tr th {
+    font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto,
+    helvetica neue, Arial, noto sans, sans-serif, apple color emoji,
+    segoe ui emoji, segoe ui symbol, noto color emoji !important;
+    color: #A1A5B7;
+    font-weight: 600;
+    font-size: 16px;
+  }
+.ant-table-cell a{
+    color:#434349;
+    font-weight: 500;
+    font-size: 16;
+}  

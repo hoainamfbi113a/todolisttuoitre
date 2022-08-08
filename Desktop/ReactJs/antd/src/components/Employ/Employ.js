@@ -1,7 +1,8 @@
 import React from "react";
-import { Button, Input } from "antd";
+import { Button, Input, Select, Option } from "antd";
 import { SearchOutlined, FormOutlined } from "@ant-design/icons";
 export default function Employ() {
+  const { Option } = Select;
   return (
     <div className="Employee">
       <div>
@@ -38,33 +39,71 @@ export default function Employ() {
             }}
             placeholder="Họ và tên"
           />
-          <Input
+         <Select
             style={{
-              // position: "absolute",
-              width: 200,
-              height: 40,
-              marginLeft: 30,
-              // left: 256,
-              // top: 73,
-
+              width: 120,
+              // height: 40,
+              marginLeft: 35,
               background: "#F0F5FA",
               borderRadius: 3,
             }}
             placeholder="Chức vụ"
-          />
-          <Input
+            optionFilterProp="children"
+            filterOption={(input, option) => option.children.includes(input)}
+            filterSort={(optionA, optionB) => {
+              optionA.children
+                .toLowerCase()
+                .localeCompare(optionB.children.toLowerCase());
+            }}
+            >
+            <Option value='1'>Tổng biên tập</Option>
+            <Option value='2'>Phó tổng biên tập</Option>
+            <Option value='3'>Trưởng phòng</Option>
+            <Option value='4'>Phó trưởng phòng</Option>
+            <Option value='5'>Phóng viên</Option>
+            <Option value='6'>Biên tập viên</Option>
+            <Option value='7'>Developer</Option>
+            <Option value='8'>IT Helpdesk</Option>
+            <Option value='9'>Tỉnh táo viên</Option>
+            <Option value='10'>Họa sĩ</Option>
+            <Option value='11'>Bảo vệ</Option>
+            <Option value='12'>Marketing</Option>
+            <Option value='13'>Lễ tân</Option>
+            <Option value='14'>Moraser</Option>
+            </Select>
+          <Select
             style={{
-              // position: "absolute",
-              width: 200,
-              height: 40,
+              width: 150,
+              // height: 40,
               marginLeft: 35,
-              // left: 486,
-              // top: 73,
               background: "#F0F5FA",
               borderRadius: 3,
+              
             }}
             placeholder="Phòng ban"
-          />
+            optionFilterProp="children"
+            filterOption={(input, option) => option.children.includes(input)}
+            filterSort={(optionA, optionB) => {
+              optionA.children
+                .toLowerCase()
+                .localeCompare(optionB.children.toLowerCase());
+            }}
+            >
+            <Option value='1'>Phòng CNTT</Option>
+            <Option value='2'>Phòng Biên tập viên</Option>
+            <Option value='3'>Phòng Quảng cáo</Option>
+            <Option value='4'>Phòng Tỉnh táo viên</Option>
+            <Option value='5'>Phòng Hậu cần</Option>
+            <Option value='6'>Phòng Căn tin</Option>
+            <Option value='7'>Phòng Công tác bạn đọc</Option>
+            <Option value='8'>Phòng Công tác xã hội</Option>
+            <Option value='9'>Phòng Giáo dục khoa học</Option>
+            <Option value='10'>Phòng Họa sĩ</Option>
+            <Option value='11'>Phòng Kho vận</Option>
+            <Option value='12'>Phòng Kinh tế</Option>
+            <Option value='13'>Phòng Morase</Option>
+            <Option value='14'>Nhà in</Option>
+            </Select>
           <Button
             style={{
               background: "#35794A",
@@ -72,10 +111,7 @@ export default function Employ() {
               width: 115,
               height: 40,
               marginLeft: 40,
-              // left: 550,
-              // top: 73,
               borderRadius: 4,
-              //   position: "absolute",
               cursor: "pointer",
               border: "1px solid #35794A",
               boxSizing: "border-box",
@@ -107,7 +143,6 @@ export default function Employ() {
           </Button>
         </div>
       </div>
-      {/* <hr /> */}
     </div>
   );
 }

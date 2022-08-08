@@ -1,7 +1,82 @@
-import React from "react";
-import { Table, Checkbox } from "antd";
+import React, {useState, useRef, useContext, useEffect} from "react";
+import { Table, Checkbox,Form, Input, InputNumber, Popconfirm,  Typography } from "antd";
 import "./Table.css";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+
+const EditableContext = React.createContext(null);
+const EditableRow =({index, ...props}) => {
+  const [form] = Form.useForm();
+  return(
+    <Form form={form} component={false}>
+    <EditableContext.Provider value={form}>
+        <tr {...props} />
+      </EditableContext.Provider>
+    </Form>
+  );
+};
+const EditableCell=({
+  title,
+  editable,
+  children,
+  dataIndex,
+  record,
+  handleSave,
+  ...restProps
+}) => {
+  const [editing, setEditing ] =useState(false) ;
+  const inputRef = useRef(null);
+  const form = useContext(EditableContext);
+  useEffect(() =>{
+    if(editing){
+      inputRef.current.focus();
+    }
+  }, [editing]);
+  const toggleEdit = () => {
+    setEditing(!editing);
+    form.setFieldsValue({
+      [dataIndex]: record[dataIndex],
+    });
+  };
+  const save = async () => {
+    try{
+      const values = await form.validateFields();
+      toggleEdit();
+      handleSave({...record, ...values});
+    }catch (errInfo){
+      console.log("Save failed:", errInfo);
+    }
+  };
+  let childNode = children;
+  if(editable){
+    childNode=editing ? (
+      <Form.Item
+      style={{
+        margin: 0,
+      }}
+      name={dataIndex}
+      rules={[
+        {
+          required: true,
+          message: `${title} is required.`,
+        },
+      ]}
+    >
+      <Input ref={inputRef} onPressEnter={save} onBlur={save} />
+    </Form.Item>
+    ) : (
+      <div
+      className="editable-cell-value-wrap"
+      style={{
+        paddingRight: 24,
+      }}
+      onClick={toggleEdit}
+    >
+      {children}
+    </div>
+    );
+  }
+  return <td {...restProps}>{childNode}</td>;
+};
 
 const columns = [
   {
@@ -37,24 +112,17 @@ const columns = [
     key: "finish check",
     render: (text) => <Checkbox />,
   },
-
-  //   {
-  //     title: "Chấm kết thúc",
-  //     dataIndex: "address",
-  //     key: "address",
-  //     render: (text) => <Checkbox />,
-  //   },
   {
     title: "Thao tác",
     key: "action",
-    render: (record) => {
+    render: (_, record) => {
       return (
         <>
           <button className="edit_table">
             <EditOutlined />
             Chỉnh sửa
           </button>
-          <button className="delete_table">
+          <button title="Sure to delete" onConfirm className="delete_table" >
             <DeleteOutlined /> Xóa
           </button>
         </>
@@ -128,10 +196,39 @@ const data = [
     address: "Sidney No. 1 Lake Park",
   },
 ];
-
-const TableComponent = () => {
-  return <Table className="border-text" columns={columns} dataSource={data} />;
+for (let i=0; i<100; i++) {
+  data.push({
+    key: i.toString(),
+    name:`Nhóm ${i}`,
+    who: "Nguyễn Văn A",
+    level: "100",
+    number: "2",
+  })
 };
-<p>Hiển thị 10 trong 600</p>;
+  
+  
+const TableComponent = () => {
+  const [dataSource, setDataSource] = useState(data);
+  const [count, setCount] = useState(2);
+  const handleDelete = (key) => {
+    const newData = dataSource.filter((item) => item.key !== key);
+    setDataSource(newData);
+  };
+  const defaultColumns = useState(columns);
+  const handleAdd = () => {
+    const newData = {
+      key: count,
+      name: `Nhóm ${count}`,
+      who: `Nguyễn Văn ${count}`,
+      level: "100",
+    number: "2",     
+    };
+    setDataSource([...dataSource, newData]);
+    setCount(count + 1);
+  };
+  return (
 
+  <Table className="border-text" columns={columns} dataSource={data} />
+  )
+};
 export default TableComponent;
